@@ -89,7 +89,7 @@ export const Children: React.FC = () => {
         required={required}
         value={form[id]}
         onChange={e => setForm(prev => ({ ...prev, [id]: e.target.value }))}
-        className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
+        className="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow"
       />
     </div>
   );
@@ -97,10 +97,10 @@ export const Children: React.FC = () => {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-800">Children</h2>
+        <h2 className="text-3xl font-bold text-slate-800">Children</h2>
         <button
           onClick={openAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors text-sm font-medium shadow-sm"
+          className="flex items-center gap-2 px-5 py-3.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors text-base font-semibold shadow-sm"
         >
           <Plus size={16} />
           Add Child
@@ -109,23 +109,23 @@ export const Children: React.FC = () => {
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-slate-400">Loading…</div>
+          <div className="p-10 text-center text-slate-400 text-lg">Loading…</div>
         ) : children.length === 0 ? (
-          <div className="p-12 text-center text-slate-400">
-            <UserPlus size={40} className="mx-auto mb-3 opacity-30" />
-            <p className="font-medium">No children registered yet</p>
-            <p className="text-sm mt-1">Click "Add Child" to register the first child.</p>
+          <div className="p-14 text-center text-slate-400">
+            <UserPlus size={48} className="mx-auto mb-4 opacity-30" />
+            <p className="text-lg font-semibold">No children registered yet</p>
+            <p className="text-base mt-2">Click "Add Child" to register the first child.</p>
           </div>
         ) : (
           <div className="divide-y divide-slate-50">
             {children.map(child => (
               <div key={child.id} className="flex items-center gap-4 px-6 py-4">
-                <div className="w-10 h-10 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-bold flex-shrink-0 select-none">
+                <div className="w-12 h-12 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 select-none">
                   {child.name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-slate-800 truncate">{child.name}</p>
-                  <p className="text-xs text-slate-400 mt-0.5 truncate">
+                  <p className="text-lg font-bold text-slate-800 truncate">{child.name}</p>
+                  <p className="text-sm text-slate-400 mt-0.5 truncate">
                     {child.date_of_birth
                       ? `DOB: ${format(parseISO(child.date_of_birth), 'd MMM yyyy')}`
                       : 'DOB: Not set'}
@@ -171,14 +171,14 @@ export const Children: React.FC = () => {
               type="button"
               onClick={() => setModal({ open: false })}
               disabled={saving}
-              className="flex items-center gap-2 px-4 py-2.5 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-5 py-3.5 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 text-base font-medium transition-colors"
             >
-              <X size={16} /> Cancel
+              <X size={18} /> Cancel
             </button>
             <button
               type="submit"
               disabled={saving || !form.name.trim()}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-40 text-sm font-medium transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-40 text-base font-semibold transition-colors"
             >
               <Check size={16} />
               {saving ? 'Saving…' : modal.child ? 'Save Changes' : 'Add Child'}

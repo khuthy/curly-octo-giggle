@@ -57,96 +57,99 @@ export const Attendance: React.FC = () => {
   const isToday = date === format(new Date(), 'yyyy-MM-dd');
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-800">Attendance</h2>
+        <h2 className="text-3xl font-bold text-slate-800">Attendance</h2>
         <button
           onClick={loadRecords}
-          className="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition-colors"
+          className="p-3 rounded-xl hover:bg-slate-100 text-slate-400 transition-colors"
           title="Refresh"
         >
-          <RefreshCw size={18} />
+          <RefreshCw size={22} />
         </button>
       </div>
 
       {/* Date navigator */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 flex items-center gap-3">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex items-center gap-3">
         <button
           onClick={() => shiftDate(-1)}
-          className="p-2 rounded-xl hover:bg-slate-100 transition-colors text-slate-600"
+          className="p-3 rounded-xl hover:bg-slate-100 transition-colors text-slate-600 flex-shrink-0"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={24} />
         </button>
         <div className="flex-1 text-center">
           <input
             type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
-            className="font-semibold text-slate-800 text-center border-0 outline-none bg-transparent cursor-pointer text-base w-full"
+            className="font-bold text-slate-800 text-center border-0 outline-none bg-transparent cursor-pointer text-xl w-full"
           />
-          {isToday && <p className="text-xs text-primary-600 font-medium mt-0.5">Today</p>}
+          {isToday && <p className="text-sm text-primary-600 font-semibold mt-1">Today</p>}
         </div>
         <button
           onClick={() => shiftDate(1)}
-          className="p-2 rounded-xl hover:bg-slate-100 transition-colors text-slate-600"
+          className="p-3 rounded-xl hover:bg-slate-100 transition-colors text-slate-600 flex-shrink-0"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={24} />
         </button>
       </div>
 
       {/* Children grid */}
       {loading ? (
-        <div className="text-center text-slate-400 py-16">Loading…</div>
+        <div className="text-center text-slate-400 py-20 text-lg">Loading…</div>
       ) : records.length === 0 ? (
-        <div className="text-center text-slate-400 py-16 bg-white rounded-2xl border border-slate-100">
+        <div className="text-center text-slate-400 py-20 bg-white rounded-2xl border border-slate-100 text-lg">
           No children registered. Add children under the Children tab.
         </div>
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {records.map((record) => {
             const status = getStatus(record);
             return (
-              <div key={record.childId} className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-11 h-11 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-bold text-xl select-none flex-shrink-0">
+              <div key={record.childId} className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                {/* Child header */}
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-bold text-2xl select-none flex-shrink-0">
                     {record.childName.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-800">{record.childName}</p>
-                    <StatusBadge
-                      status={status}
-                      timeIn={record.timeIn}
-                      timeOut={record.timeOut}
-                      size="sm"
-                    />
+                    <p className="text-xl font-bold text-slate-800">{record.childName}</p>
+                    <div className="mt-1">
+                      <StatusBadge
+                        status={status}
+                        timeIn={record.timeIn}
+                        timeOut={record.timeOut}
+                        size="sm"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 {/* Times */}
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div className="bg-slate-50 rounded-xl p-3">
-                    <p className="text-xs text-slate-400 mb-0.5">Morning sign in</p>
-                    <p className="font-semibold text-slate-700 text-sm">{record.timeIn || '—'}</p>
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  <div className="bg-slate-50 rounded-xl p-4">
+                    <p className="text-sm text-slate-400 mb-1 font-medium">Morning sign in</p>
+                    <p className="text-xl font-bold text-slate-700">{record.timeIn || '—'}</p>
                     {record.signatureIn && (
                       <button
                         onClick={() =>
                           setViewSig({ url: record.signatureIn!, label: `${record.childName} – Sign In` })
                         }
-                        className="text-xs text-primary-600 mt-1 hover:underline"
+                        className="text-sm text-primary-600 mt-1.5 hover:underline font-medium"
                       >
                         View signature
                       </button>
                     )}
                   </div>
-                  <div className="bg-slate-50 rounded-xl p-3">
-                    <p className="text-xs text-slate-400 mb-0.5">Afternoon sign out</p>
-                    <p className="font-semibold text-slate-700 text-sm">{record.timeOut || '—'}</p>
+                  <div className="bg-slate-50 rounded-xl p-4">
+                    <p className="text-sm text-slate-400 mb-1 font-medium">Afternoon sign out</p>
+                    <p className="text-xl font-bold text-slate-700">{record.timeOut || '—'}</p>
                     {record.signatureOut && (
                       <button
                         onClick={() =>
                           setViewSig({ url: record.signatureOut!, label: `${record.childName} – Sign Out` })
                         }
-                        className="text-xs text-primary-600 mt-1 hover:underline"
+                        className="text-sm text-primary-600 mt-1.5 hover:underline font-medium"
                       >
                         View signature
                       </button>
@@ -154,22 +157,22 @@ export const Attendance: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Actions */}
-                <div className="flex gap-2">
+                {/* Action buttons */}
+                <div className="flex gap-3">
                   <button
                     onClick={() => setTarget({ record, mode: 'in' })}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-medium bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl text-base font-semibold bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     disabled={status === 'signed_out'}
                   >
-                    <LogIn size={15} />
+                    <LogIn size={20} />
                     Sign In
                   </button>
                   <button
                     onClick={() => setTarget({ record, mode: 'out' })}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl text-base font-semibold bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     disabled={status !== 'signed_in'}
                   >
-                    <LogOut size={15} />
+                    <LogOut size={20} />
                     Sign Out
                   </button>
                 </div>

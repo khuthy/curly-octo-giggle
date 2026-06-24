@@ -34,13 +34,13 @@ export const StatusBadge: React.FC<Props> = ({ status, timeIn, timeOut, size = '
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full font-medium ${className} ${
-        sm ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm'
+      className={`inline-flex items-center gap-1.5 rounded-full font-semibold ${className} ${
+        sm ? 'px-3 py-1 text-sm' : 'px-4 py-1.5 text-base'
       }`}
     >
-      <Icon size={sm ? 12 : 14} />
+      <Icon size={sm ? 14 : 16} />
       {label}
-      {time && <span className="opacity-70">· {time}</span>}
+      {time && <span className="opacity-70 font-normal">· {time}</span>}
     </span>
   );
 };

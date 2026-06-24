@@ -40,11 +40,11 @@ export const Reports: React.FC = () => {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-800">Reports</h2>
+        <h2 className="text-3xl font-bold text-slate-800">Reports</h2>
         {records.length > 0 && (
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 text-sm font-medium transition-colors print:hidden"
+            className="flex items-center gap-2 px-5 py-3 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 text-base font-medium transition-colors print:hidden"
           >
             <Printer size={16} />
             Print
@@ -63,7 +63,7 @@ export const Reports: React.FC = () => {
               value={startDate}
               max={endDate}
               onChange={e => setStartDate(e.target.value)}
-              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
           <div className="flex-1">
@@ -74,14 +74,14 @@ export const Reports: React.FC = () => {
               min={startDate}
               max={today}
               onChange={e => setEndDate(e.target.value)}
-              className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
           <div className="flex items-end">
             <button
               onClick={handleSearch}
               disabled={loading}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 text-sm font-medium transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-primary-600 text-white rounded-xl hover:bg-primary-700 disabled:opacity-50 text-base font-semibold transition-colors"
             >
               <Search size={16} />
               {loading ? 'Searching…' : 'Search'}

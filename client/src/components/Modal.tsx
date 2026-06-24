@@ -23,8 +23,8 @@ export const Modal: React.FC<Props> = ({ isOpen, onClose, title, subtitle, child
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto">
         <div className="flex items-start justify-between p-6 border-b border-slate-100">
           <div>
-            <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
-            {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
+            <h2 className="text-2xl font-bold text-slate-800">{title}</h2>
+            {subtitle && <p className="text-base text-slate-500 mt-1">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
